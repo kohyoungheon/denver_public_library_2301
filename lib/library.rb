@@ -40,6 +40,7 @@ class Library
     if @checked_out_books.include?(book)
       @checked_out_books.delete(book)
       @books << book
+      book
     else
       return "Are you sure you checked out this book?"
     end

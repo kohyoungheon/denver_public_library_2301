@@ -83,19 +83,18 @@ RSpec.describe Library do
     end
   end
 
-  # describe "#return" do
-  #   it "returns book if it was check out" do
-  #     @library.add_author(@charlotte_bronte)
-  #     require 'pry'; binding.pry
+  describe "#return" do
+    it "returns book if it was check out" do
+      @library.add_author(@charlotte_bronte)
 
-  #     expect(@library.books.length).to eq(2)
-  #     expect(@library.checked_out_books).to eq([])
-  #     expect(@library.return(@jane_eyre)).to eq("Are you sure you checked out this book?")
+      expect(@library.books.length).to eq(2)
+      expect(@library.checked_out_books).to eq([])
+      expect(@library.return(@jane_eyre)).to eq("Are you sure you checked out this book?")
 
-  #     @library.check_out(@jane_eyre)
-  #     expect(@library.checked_out_books).to eq([@jane_eyre])
-  #     expect(@library.return(@jane_eyre)).to eq([@jane_eyre])
+      @library.check_out(@jane_eyre)
+      expect(@library.checked_out_books).to eq([@jane_eyre])
+      expect(@library.return(@jane_eyre)).to eq(@jane_eyre)
 
-  #   end
-  # end
+    end
+  end
 end
