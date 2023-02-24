@@ -39,4 +39,25 @@ RSpec.describe Library do
       expect(@library.books).to eq([@jane_eyre, @villette, @bobs_novel, @bobs_poems])
     end
   end
+
+  describe "#publication_time_frame_for" do
+    it "returns authors first and last publication in a hash" do
+
+      timeframe_1 = @library.publication_time_frame_for(@charlotte_bronte)
+
+      expect(timeframe_1).to be_instance_of(Hash)
+      expect(timeframe_1).to eq({:start => "1847", :end =>"1853"})
+
+      @examplebook1 = @charlotte_bronte.write("ex1", "October 16, 1747")
+      @examplebook2 = @charlotte_bronte.write("ex2", "October 16, 1947")
+      @examplebook3 = @charlotte_bronte.write("ex3", "October 16, 2047")
+      @examplebook4 = @charlotte_bronte.write("ex1", "October 16, 1317")
+      @examplebook5 = @charlotte_bronte.write("ex1", "October 16, 1004")
+
+      timeframe_2 = @library.publication_time_frame_for(@charlotte_bronte)
+
+      expect(@charlotte_bronte.books.length).to eq(7)
+      expect(timeframe_2).to eq({:start => "1004", :end =>"2047"})
+    end
+  end
 end
