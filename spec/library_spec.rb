@@ -60,4 +60,42 @@ RSpec.describe Library do
       expect(timeframe_2).to eq({:start => "1004", :end =>"2047"})
     end
   end
+
+  describe "#check_out" do
+    it "checks out a book if available" do
+
+      expect(@library.books.length).to eq(0)
+      
+      randombook = @charlotte_bronte.write("LALALALA", "October 10, 2000")
+      expect(@library.check_out(randombook)).to eq("We do not have this book.")
+
+      @library.add_author(@charlotte_bronte)
+      expect(@library.books).to eq([@jane_eyre, @villette, randombook])
+
+      expect(@library.books.length).to eq(3)
+      expect(@library.check_out(randombook)).to eq([randombook])
+
+      expect(@library.books.length).to eq(2)
+      expect(@library.books).to eq([@jane_eyre, @villette])
+
+      expect(@library.checked_out_books.length).to eq(1)
+      expect(@library.checked_out_books).to eq([randombook])
+    end
+  end
+
+  # describe "#return" do
+  #   it "returns book if it was check out" do
+  #     @library.add_author(@charlotte_bronte)
+  #     require 'pry'; binding.pry
+
+  #     expect(@library.books.length).to eq(2)
+  #     expect(@library.checked_out_books).to eq([])
+  #     expect(@library.return(@jane_eyre)).to eq("Are you sure you checked out this book?")
+
+  #     @library.check_out(@jane_eyre)
+  #     expect(@library.checked_out_books).to eq([@jane_eyre])
+  #     expect(@library.return(@jane_eyre)).to eq([@jane_eyre])
+
+  #   end
+  # end
 end
